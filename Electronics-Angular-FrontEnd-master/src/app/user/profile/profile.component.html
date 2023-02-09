@@ -1,0 +1,370 @@
+ <!-- Plugins CSS File -->
+ <link rel="stylesheet" href="/assets/users/css/bootstrap.min.css">
+ <!-- Main CSS File -->
+ <link rel="stylesheet" href="/assets/users/css/style.css">
+ <!-- Google Font: Source Sans Pro -->
+ <link rel="stylesheet"
+   href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+ <!-- Font Awesome -->
+ <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
+ <!-- Theme style -->
+ <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
+ <!-- Google Font: Source Sans Pro -->
+ <link rel="stylesheet"
+   href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Merriweather:ital,wght@0,300;1,300&display=swap"
+   rel="stylesheet">
+ <div class="page-wrapper">
+   <main class="main">
+     <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+       <div class="container">
+         <h1 class="page-title">User Profile<span>Shop</span></h1>
+       </div><!-- End .container -->
+     </div><!-- End .page-header -->
+     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+       <div class="container">
+         <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+           <li class="breadcrumb-item"><a href="#">Shop</a></li>
+           <li class="breadcrumb-item active" aria-current="page">My Account</li>
+         </ol>
+       </div><!-- End .container -->
+     </nav><!-- End .breadcrumb-nav -->
+
+     <div class="page-content">
+       <div class="dashboard">
+         <div class="container">
+           <div class="row">
+             <aside class="col-md-3 col-lg-2">
+               <ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+                 <li class="nav-item">
+                   <a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab"
+                     aria-controls="tab-dashboard" aria-selected="true">Dashboard</a>
+                 </li>
+                 <li class="nav-item">
+                   <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab"
+                     aria-controls="tab-orders" aria-selected="false">Orders</a>
+                 </li>
+                 <li class="nav-item">
+                   <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab"
+                     aria-controls="tab-downloads" aria-selected="false">Cart</a>
+                 </li>
+                 <li class="nav-item">
+                   <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab"
+                     aria-controls="tab-account" aria-selected="false">Account Details</a>
+                 </li>
+                 <li class="nav-item">
+                   <a class="nav-link" href="javascript:void(0)" (click)="logOut()">Sign Out</a>
+                 </li>
+               </ul>
+             </aside><!-- End .col-lg-3 -->
+
+             <div class="col-md-9 col-lg-10">
+               <div class="tab-content">
+                 <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel"
+                   aria-labelledby="tab-dashboard-link">
+                   <p>Hello <span class="font-weight-normal text-dark">{{user.firstName+' '+user.lastName}}</span> (not
+                     <span class="font-weight-normal text-dark">{{user.lastName}}</span>? <a
+                       href="javascript:void(0)">Log out</a>)
+                     <br>
+                     From your account dashboard you can view your <a href="#tab-orders"
+                       class="tab-trigger-link link-underline">recent orders</a>, manage your <a href="#tab-address"
+                       class="tab-trigger-link">shipping and billing addresses</a>, and <a href="#tab-account"
+                       class="tab-trigger-link">edit your password and account details</a>.</p>
+                 </div><!-- .End .tab-pane -->
+
+                 <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+                   <p *ngIf="orders.length==0">No order has been made yet.</p>
+                   <a *ngIf="orders.length==0" href="category.html" class="btn btn-outline-primary-2"><span>GO
+                       SHOP</span><i class="icon-long-arrow-right"></i></a>
+                   <div *ngIf="orders.length>0" class="invoice-table">
+                     <div class="row">
+                       <div class="col-12">
+                         <div class="card">
+                           <div class="card-header">
+                             <h3 class="card-title" [ngStyle]="{'font-size': '16px'}">Invoices of {{user.lastName}}
+                               {{user.firstName}}</h3>
+
+                             <div class="card-tools" [ngStyle]="{'font-size': '16px'}">
+                               <div class="input-group input-group-sm" style="width: 250px;">
+                                 <input type="text" name="table_search" class="form-control float-right"
+                                   placeholder="Search">
+
+                                 <div class="input-group-append">
+                                   <button type="submit" class="btn btn-default">
+                                     <i class="fas fa-search"></i>
+                                   </button>
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
+                           <!-- /.card-header -->
+                           <div class="card-body table-responsive p-0" style="height: 300px;">
+                             <table class="table table-head-fixed text-nowrap">
+                               <thead>
+                                 <tr>
+                                   <th>ID</th>
+                                   <th>Customer</th>
+                                   <th>Date</th>
+                                   <th>Ship</th>
+                                   <th>Payment</th>
+                                   <th>Contact</th>
+                                   <th>Destination</th>
+                                   <th>Status</th>
+                                   <th>&nbsp;</th>
+                                 </tr>
+                               </thead>
+                               <tbody>
+                                 <tr *ngFor="let item of orders">
+                                   <td>{{item.id}}</td>
+                                   <td>{{item.customer}}</td>
+                                   <td>{{item.date|date}}</td>
+                                   <td>{{item.ship}}</td>
+                                   <td>{{item.paymentMethod}}</td>
+                                   <td>{{item.customerContact}}</td>
+                                   <td>{{item.shippingAddress}}</td>
+                                   <td>{{item.status}}</td>
+                                   <td><a href="#details-modal" (click)="loadInvoice(item)" data-toggle="modal"><i
+                                         class="icon-info-circle" [ngStyle]="{'font-size': '16px'}"></i></a>
+                                   </td>
+                                 </tr>
+                               </tbody>
+                             </table>
+                           </div>
+                           <!-- /.card-body -->
+                         </div>
+                         <!-- /.card -->
+                       </div>
+                     </div>
+                   </div>
+                 </div><!-- .End .tab-pane -->
+
+                 <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
+                   <p>No downloads available yet.</p>
+                   <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i
+                       class="icon-long-arrow-right"></i></a>
+                 </div><!-- .End .tab-pane -->
+
+                 <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
+                   <form action="#">
+                     <div class="row">
+                       <div class="col-sm-6">
+                         <label>First Name *</label>
+                         <input type="text" class="form-control" [(ngModel)]="user.firstName"
+                           [ngModelOptions]="{standalone:true}" required>
+                       </div><!-- End .col-sm-6 -->
+
+                       <div class="col-sm-6">
+                         <label>Last Name *</label>
+                         <input type="text" class="form-control" [(ngModel)]="user.lastName"
+                           [ngModelOptions]="{standalone:true}" required>
+                         <small class="form-text">This will be how your name will be displayed in the account section
+                           and in
+                           reviews</small>
+                       </div><!-- End .col-sm-6 -->
+                     </div><!-- End .row -->
+
+                     <label>Email address *</label>
+                     <input type="email" class="form-control" [(ngModel)]="user.email"
+                       [ngModelOptions]="{standalone:true}" required>
+
+                     <label>Address *</label>
+                     <input type="text" class="form-control" [(ngModel)]="user.address"
+                       [ngModelOptions]="{standalone:true}" required>
+
+                     <label>Contact *</label>
+                     <input class="form-control" [(ngModel)]="user.phone" [ngModelOptions]="{standalone:true}" required>
+
+                     <label>Current password (leave blank to leave unchanged)</label>
+                     <input type="password" class="form-control">
+
+                     <label>New password (leave blank to leave unchanged)</label>
+                     <input type="password" class="form-control">
+
+                     <label>Confirm new password</label>
+                     <input type="password" class="form-control mb-2">
+
+                     <button type="submit" class="btn btn-outline-primary-2">
+                       <span>SAVE CHANGES</span>
+                       <i class="icon-long-arrow-right"></i>
+                     </button>
+                   </form>
+                 </div><!-- .End .tab-pane -->
+               </div>
+             </div><!-- End .col-lg-9 -->
+           </div><!-- End .row -->
+           <!-- <router-outlet></router-outlet> -->
+         </div><!-- End .container -->
+       </div><!-- End .dashboard -->
+     </div><!-- End .page-content -->
+   </main><!-- End .main -->
+ </div><!-- End .page-wrapper -->
+ <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+ <!-- Invoice Details Modal -->
+ <div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 1000px;">
+     <div class="modal-content">
+       <div class="modal-body" style="padding:0px">
+         <div class="row">
+           <!-- <div class="col-md-12 col-sm-12"> -->
+           <div class="form-box col-md-12 col-sm-12" style="padding:0px">
+             <div class="hold-transition sidebar-mini">
+               <div class="wrapper row">
+                 <!-- Content Wrapper. Contains page content -->
+                 <div class="content-wrapper col-sm-12 col-md-12" style="margin:0px">
+                   <!-- Content Header (Page header) -->
+                   <section class="content-header">
+                     <div class="container-fluid" style="padding:0px">
+                       <div class="row mb-2">
+                         <div class="col-sm-12" style="text-align: center;">
+                           <h1>Invoice #{{invoice.id}}</h1>
+                         </div>
+                       </div>
+                     </div><!-- /.container-fluid -->
+                   </section>
+                   <section class="content" style="padding:0px">
+                     <div class="container-fluid">
+                       <div class="row">
+                         <div class="col-12">
+                           <div class="callout callout-info">
+                             <h5><i class="fas fa-info"></i> Note:</h5>
+                             Only an Administrator is authorized to perform changes in the details of invoices
+                           </div>
+                           <!-- Main content -->
+                           <div class="invoice p-3 mb-3">
+                             <!-- title row -->
+                             <div class="row">
+                               <div class="col-12">
+                                 <h4>
+                                   <i class="fas fa-globe"></i> Molla Electronics, Inc.
+                                   <small class="float-right"></small>
+                                 </h4>
+                               </div>
+                               <!-- /.col -->
+                             </div>
+                             <!-- info row -->
+                             <div class="row invoice-info">
+                               <div class="col-sm-4 invoice-col">
+                                 From
+                                 <address>
+                                   <strong>Molla Electronics Headquarter, Inc.</strong><br>
+                                   795 Folsom Ave, Suite 600<br>
+                                   San Francisco, CA 94107<br>
+                                   Phone: 0339882065<br>
+                                   Email: thuyvanthai2013@gmail.com
+                                 </address>
+                               </div>
+                               <!-- /.col -->
+                               <div class="col-sm-4 invoice-col">
+                                 To
+                                 <address>
+                                   <strong>{{invoice.customer}}</strong><br>
+                                   {{invoice.shippingAddress}}<br>
+                                   <!-- {{invoice.shippingAddress}}<br> -->
+                                   Phone: 0{{invoice.customerContact}}<br>
+                                 </address>
+                               </div>
+                               <!-- /.col -->
+                               <div class="col-sm-4 invoice-col">
+                                 <b>Invoice Info</b><br>
+                                 <!-- <br> -->
+                                 <b>Order ID:</b> <br>
+                                 <b>Payment Due:</b> {{dueDate(invoice.date,7)}}<br>
+                                 <b>Status:&nbsp;{{invoice.status}} </b>
+                               </div>
+                               <!-- /.col -->
+                             </div>
+                             <!-- /.row -->
+                             <!-- Table row -->
+                             <div class="row">
+                               <div class="col-12 table-responsive">
+                                 <table class="table table-striped table-details">
+                                   <thead>
+                                     <tr>
+                                       <th>Quantity</th>
+                                       <th>Product Name</th>
+                                       <th>Color</th>
+                                       <th>Specs</th>
+                                       <th>Price</th>
+                                       <th>Subtotal</th>
+                                     </tr>
+                                   </thead>
+                                   <tbody>
+                                     <tr *ngFor="let detail of invoice.invoiceDetails">
+                                       <td>{{detail.quantity}}</td>
+                                       <td>{{detail.product.name}}</td>
+                                       <td>{{detail.product.color}}</td>
+                                       <td>{{detail.product.spec}}</td>
+                                       <td>{{detail.product.price|currency}}</td>
+                                       <td>{{detail.quantity*detail.product.price|currency}}</td>
+                                     </tr>
+                                   </tbody>
+                                 </table>
+                               </div>
+                               <!-- /.col -->
+                             </div>
+                             <!-- /.row -->
+                             <div class="row">
+                               <!-- accepted payments column -->
+                               <div class="col-6">
+                                 <p class="lead">Payment Methods:&nbsp;{{invoice.paymentMethod}}</p>
+                                 <p class="lead"></p>
+                               </div>
+                               <!-- /.col -->
+                               <div class="col-6">
+                                 <div class="table-responsive">
+                                   <table class="table">
+                                     <tr>
+                                       <th style="width:50%">Subtotal:</th>
+                                       <td>{{subtotal|currency}}</td>
+                                     </tr>
+                                     <tr>
+                                       <th>Tax (9.3%)</th>
+                                       <td>{{subtotal*.093|currency}}</td>
+                                     </tr>
+                                     <tr>
+                                       <th>Shipping (1%)</th>
+                                       <td>{{subtotal*.01|currency}}</td>
+                                     </tr>
+                                     <tr>
+                                       <th>Total:</th>
+                                       <td>{{subtotal+subtotal*.093+subtotal*.01|currency}}</td>
+                                     </tr>
+                                   </table>
+                                 </div>
+                               </div>
+                               <!-- /.col -->
+                             </div>
+                             <!-- /.row -->
+                             <!-- this row will not appear when printing -->
+                             <div class="row no-print">
+                               <div class="col-12">
+                                 <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i
+                                     class="fas fa-print"></i> Print</a>
+                                 <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                   <i class="fas fa-download"></i> Generate PDF
+                                 </button>
+                               </div>
+                             </div>
+                           </div>
+                           <!-- /.invoice -->
+                         </div><!-- /.col -->
+                       </div><!-- /.row -->
+                     </div><!-- /.container-fluid -->
+                   </section>
+                   <!-- /.content -->
+                 </div>
+                 <!-- /.content-wrapper -->
+               </div>
+               <!-- ./wrapper -->
+               <!-- </div> -->
+             </div>
+           </div>
+         </div><!-- End .form-box -->
+       </div><!-- End .modal-body -->
+     </div><!-- End .modal-content -->
+   </div><!-- End .modal-dialog -->
+ </div><!-- End .modal -->

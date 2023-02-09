@@ -1,0 +1,19 @@
+.prod-img {
+  object-fit: cover;
+  height: 240px;
+  overflow: hidden;
+}
+/* .category-label {
+  color: black;
+} */
+.category-label:hover {
+  background-color: #00b894;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.cate {
+  color: #2c3e50;
+}
+.category-label:hover .cate {
+  color: #ecf0f1;
+}

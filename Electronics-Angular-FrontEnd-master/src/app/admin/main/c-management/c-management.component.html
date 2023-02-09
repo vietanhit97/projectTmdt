@@ -1,0 +1,77 @@
+<h1>Spring Boot Categories </h1>
+<div class="wrap">
+  <div class="main-display">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="aside">
+          <h2>Thông tin</h2>
+          <p class="lbl">Mã danh mục</p>
+          <input type="number" title="Employee _Details" placeholder="" disabled [(ngModel)]="category.id">
+          <p class="lbl">Tên danh mục</p>
+          <input type="text" title="Employee _Details" placeholder="" [(ngModel)]="category.name">
+
+          <div class="controller">
+            <button type="button" class="btn btn-block btn-success btn-sm" id="btnAdd" title="none"
+              (click)="add(category)">Add</button>
+            <button type="button" class="btn btn-block btn-info btn-sm" id="btnUpdate" title="none"
+              (click)="update(category)">Save</button>
+            <button type="button" class="btn btn-block btn-danger btn-sm" id="btnDelete" title="none"
+              (click)="remove(category.id)">Delete</button>
+            <button type="button" class="btn btn-block btn-warning btn-sm" id="btnReload" title="none"
+              (click)="load()">Reload</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-10">
+        <div class="content">
+          <div class="list">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Danh sách Sản phẩm</h3>
+
+                    <div class="card-tools">
+                      <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                        <div class="input-group-append">
+                          <button type="submit" class="btn btn-default">
+                            <i class="fas fa-search"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body table-responsive p-0" style="height: 300px;">
+                    <table class="table table-head-fixed text-nowrap">
+                      <thead>
+                        <tr>
+                          <th>Id</th>
+                          <th>Name</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let cate of categories" (click)="loadDetails(cate.id)">
+                          <td>{{cate.id}}</td>
+                          <td>{{cate.name}}</td>
+
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-2">
+      </div> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+* {
+  font-family: "Times New Roman", Times, serif;
+  /* font-family: monospace; */
+  /* font-family: "Merriweather", serif; */
+  /* font-family: "Grape Nuts", cursive; */
+}
+button {
+  font-size: 10px;
+}
+.prodId {
+  width: auto;
+}
+.detail-control {
+  /* border-radius: 10px; */
+}

@@ -1,0 +1,196 @@
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Merriweather:ital,wght@0,300;1,300&display=swap"
+  rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
+<div class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="margin: 10px 20px;">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Invoice #{{invoice.id}}</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active"><a routerLink="/admin/main/invoice">Invoice</a></li>
+              </ol>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="callout callout-info">
+                <h5><i class="fas fa-info"></i> Note:</h5>
+                Only an Administrator is authorized to perform changes in the details of invoices
+              </div>
+
+
+              <!-- Main content -->
+              <div class="invoice p-3 mb-3">
+                <!-- title row -->
+                <div class="row">
+                  <div class="col-12">
+                    <h4>
+                      <i class="fas fa-globe"></i> Molla Electronics, Inc.
+                      <small class="float-right">{{invoice.date|date:'medium'}}</small>
+                    </h4>
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- info row -->
+                <div class="row invoice-info">
+                  <div class="col-sm-4 invoice-col">
+                    From
+                    <address>
+                      <strong>Molla Electronics Headquarter, Inc.</strong><br>
+                      795 Folsom Ave, Suite 600<br>
+                      San Francisco, CA 94107<br>
+                      Phone: 0339882065<br>
+                      Email: thuyvanthai2013@gmail.com
+                    </address>
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-4 invoice-col">
+                    To
+                    <address>
+                      <strong>{{invoice.customer}}</strong><br>
+                      {{invoice.shippingAddress}}<br>
+                      <!-- {{invoice.shippingAddress}}<br> -->
+                      Phone: 0{{invoice.customerContact}}<br>
+                    </address>
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-4 invoice-col">
+                    <b>Invoice Info</b><br>
+                    <!-- <br> -->
+                    <b>Order ID:</b> {{invoice.id}}<br>
+                    <b>Payment Due:</b> {{dueDate(invoice.date,7)}}<br>
+                    <b>Status: </b>{{invoice.status}}
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+                <!-- Table row -->
+                <div class="row">
+                  <div class="col-12 table-responsive">
+                    <table class="table table-striped table-details">
+                      <thead>
+                        <tr>
+                          <th>Quantity</th>
+                          <th>Product Id</th>
+                          <th>Product Name</th>
+                          <th>Color</th>
+                          <th>Specs</th>
+                          <th>Price</th>
+                          <th>Subtotal</th>
+                          <th><button type="button" (click)="addDetail()" class="btn btn-success btn-control"><i
+                                class="fas fa-pen"></i></button>
+                          </th>
+                          <!-- <th><input type="number" [(ngModel)]="productId" placeholder="insert Product Id"
+                              class="prodId"></th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let detail of invoiceDetails">
+                          <td><input type="number" [ngStyle]="{'width': '50%'}" class="detail-control"
+                              [(ngModel)]="detail.quantity"></td>
+                          <td><input type="number" [ngStyle]="{'width': '50%'}" class="detail-control"
+                              [(ngModel)]="detail.product.id"></td>
+                          <td>{{detail.product.name}}</td>
+                          <td>{{detail.product.color}}</td>
+                          <td>{{detail.product.spec}}</td>
+                          <td>{{detail.product.price|currency}}</td>
+                          <td>{{detail.quantity*detail.product.price|currency}}</td>
+                          <td><button type="button" (click)="updateDetail(detail)"
+                              class="btn btn-success btn-control"><i class="fas fa-download"></i></button>
+                          </td>
+                          <td><button (click)="removeDetail(detail.id)" type="button"
+                              class="btn btn-danger btn-control">X</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                  <!-- accepted payments column -->
+                  <div class="col-6">
+                    <p class="lead">Payment Methods:</p>
+                    <p class="lead">{{invoice.paymentMethod}}</p>
+                    <p class="text-muted well well-sm shadow-none" style="margin-top: 5px;">
+                      Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
+                      plugg
+                      dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+                    </p>
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-6">
+                    <p class="lead">Amount Due at {{dueDate(invoice.date,2)}}</p>
+
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tr>
+                          <th style="width:50%">Subtotal:</th>
+                          <td>{{subtotal|currency}}</td>
+                        </tr>
+                        <tr>
+                          <th>Tax (9.3%)</th>
+                          <td>{{subtotal*.093|currency}}</td>
+                        </tr>
+                        <tr>
+                          <th>Shipping (1%)</th>
+                          <td>{{subtotal*.01|currency}}</td>
+                        </tr>
+                        <tr>
+                          <th>Total:</th>
+                          <td>{{subtotal+subtotal*.093+subtotal*.01|currency}}</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+                <!-- this row will not appear when printing -->
+                <div class="row no-print">
+                  <div class="col-12">
+                    <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i
+                        class="fas fa-print"></i> Print</a>
+                    <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
+                      Payment
+                    </button>
+                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                      <i class="fas fa-download"></i> Generate PDF
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- /.invoice -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+  </div>
+  <!-- ./wrapper -->
+</div>

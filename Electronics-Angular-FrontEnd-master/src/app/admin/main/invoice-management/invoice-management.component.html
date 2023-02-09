@@ -1,0 +1,125 @@
+<h1>Spring Boot Invoices </h1>
+<div class="wrap">
+  <div class="main-display">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="aside">
+          <h2>Thông tin</h2>
+          <p class="lbl">Invoice Id</p>
+          <input type="number" [(ngModel)]="invoice.id" title="Invoice _Details" placeholder="" disabled>
+          <p class="lbl">Invoice Owner</p>
+          <input type="text" [(ngModel)]="invoice.customer" title="Invoice _Details" placeholder="">
+          <p class="lbl">Invoice Created Date</p>
+          <!-- <input type="text" [(ngModel)]="invoice.date" title="Invoice _Details" placeholder=""> -->
+          <input [matDatepicker]="basicDatepicker" [(ngModel)]="invoice.date">
+          <mat-datepicker-toggle [for]="basicDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #basicDatepicker></mat-datepicker>
+          <!-- <input type="date" [(ngModel)]="invoice.date"> -->
+          <p class="lbl">Delivery</p>
+          <!-- <input type="text" [(ngModel)]="invoice.ship" title="Invoice _Details" placeholder=""> -->
+          <select title="Invoice _Details" placeholder="Select the delivery methods" name="shipping"
+            [(ngModel)]="invoice.ship" [ngModelOptions]="{standalone: true}">
+            <option value="Free Shipping">Free Shipping (15 days)</option>
+            <option value="Standard">Standard (10 days)</option>
+            <option value="Express">Express (7 days)</option>
+            <option value="Urgent">Urgent (3 days)</option>
+          </select>
+          <p class="lbl">Payment</p>
+          <!-- <input type="text" [(ngModel)]="invoice.paymentMethod" title="Invoice _Details" placeholder=""> -->
+          <select title="Invoice _Details" placeholder="Select the delivery methods" name="shipping"
+            [(ngModel)]="invoice.paymentMethod" [ngModelOptions]="{standalone: true}">
+            <option value="Direct bank transfer">Direct bank transfer</option>
+            <option value="Check payments">Check payments</option>
+            <option value="Cash on delivery">Cash on delivery</option>
+            <option value="PayPal">PayPal</option>
+            <option value="MoMo e-Wallet">MoMo e-Wallet</option>
+          </select>
+          <p class="lbl">Customer Contact</p>
+          <input type="text" title="Invoice _Details" [(ngModel)]="invoice.customerContact" placeholder="">
+          <p class="lbl">Destination</p>
+          <input type="text" title="Invoice _Details" [(ngModel)]="invoice.shippingAddress" placeholder="">
+          <p class="lbl">Invoice Status</p>
+          <!-- <input type="text" title="Invoice _Details" [(ngModel)]="invoice.status" placeholder=""> -->
+          <select title="Invoice _Details" placeholder="Select the delivery methods" name="shipping"
+            [(ngModel)]="invoice.status" [ngModelOptions]="{standalone: true}">
+            <option value="To Do">To Do</option>
+            <option value="Denied">Denied</option>
+            <option value="On Delivery">On Delivery</option>
+            <option value="Completed">Completed</option>
+          </select>
+          <div class="controller">
+            <button type="button" class="btn btn-block btn-success btn-sm" (click)="add(invoice)" id="btnAdd"
+              title="none">Add</button>
+            <button type="button" class="btn btn-block btn-info btn-sm" id="btnUpdate" title="none"
+              (click)="update(invoice)">Save</button>
+            <button type="button" class="btn btn-block btn-danger btn-sm" id="btnDelete" (click)="remove(invoice.id)"
+              title="none">Delete</button>
+            <button type="button" class="btn btn-block btn-warning btn-sm" id="btnReload" (click)="loadData()"
+              title="none">Reload</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-10">
+        <div class="content">
+          <div class="list">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Invoices List</h3>
+
+                    <div class="card-tools">
+                      <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                        <div class="input-group-append">
+                          <button type="submit" class="btn btn-default">
+                            <i class="fas fa-search"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body table-responsive p-0" style="height: 300px;">
+                    <table class="table table-head-fixed text-nowrap">
+                      <thead>
+                        <tr>
+                          <th>Invoice Id</th>
+                          <th>Invoice Owner</th>
+                          <th>Invoice Created Date</th>
+                          <th>Delivery</th>
+                          <th>Payment</th>
+                          <th>Customer Contact</th>
+                          <th>Destination</th>
+                          <th>Invoice Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of Invoices" (click)="loadInvoice(item.id)">
+                          <td>{{item.id}}</td>
+                          <td>{{item.customer}}</td>
+                          <td>{{item.date|date:'medium'}}</td>
+                          <td>{{item.ship}}</td>
+                          <td>{{item.paymentMethod}}</td>
+                          <td>{{item.customerContact}}</td>
+                          <td>{{item.shippingAddress}}</td>
+                          <td>{{item.status}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-2">
+      </div> -->
+    </div>
+  </div>
+</div>

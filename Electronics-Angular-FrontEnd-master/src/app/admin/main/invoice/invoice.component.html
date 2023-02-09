@@ -1,0 +1,179 @@
+ <!-- Google Font: Source Sans Pro -->
+ <link rel="stylesheet"
+   href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+ <!-- Font Awesome -->
+ <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
+ <!-- Ekko Lightbox -->
+ <link rel="stylesheet" href="/assets/plugins/ekko-lightbox/ekko-lightbox.css">
+ <!-- Theme style -->
+ <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
+ <!-- overlayScrollbars -->
+ <link rel="stylesheet" href="/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+ <div class="hold-transition sidebar-mini layout-fixed">
+   <div class="wrapper">
+     <!-- Content Wrapper. Contains page content -->
+     <div class="content-wrapper kanban" style="margin: 0px;">
+       <section class="content-header">
+         <div class="container-fluid">
+           <div class="row">
+             <div class="col-sm-6">
+               <h1>Invoices Overview</h1>
+             </div>
+             <div class="col-sm-6 d-none d-sm-block">
+               <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item"><a href="#">Home</a></li>
+                 <li class="breadcrumb-item active">Invoices Sorted By Status</li>
+               </ol>
+             </div>
+           </div>
+         </div>
+       </section>
+
+       <section class="content pb-3">
+         <div class="container-fluid h-100">
+           <div class="card card-row card-secondary">
+             <div class="card-header">
+               <h3 class="card-title">
+                 Denied
+               </h3>
+             </div>
+             <div class="card-body">
+               <div *ngFor="let item of Denied" class="card card-info card-outline">
+                 <div class="card-header">
+                   <h5 class="card-title">{{item.customer}}</h5>
+                   <div class="card-tools">
+                     <a [routerLink]="['details/'+item.id]" class="btn btn-tool btn-link">#{{item.id}}</a>
+                     <a [routerLink]="['details/'+item.id]" class="btn btn-tool btn-edit">
+                       <i class="fas fa-pen"></i>
+                     </a>
+                   </div>
+                 </div>
+                 <!-- <div class="card-body"> -->
+                 <div class="custom-control">
+                   <!-- <input class="custom-control-input" type="text"> -->
+                   <!-- <input type="text" class="custom-control-input">
+                  <label for="customCheckbox1" class="custom-control-label">Status</label> -->
+                   <p><span>Date Created:</span> {{item.date|date}}</p>
+                   <p><span>Delivery Method:</span> {{item.ship}}</p>
+                   <p><span>Payment Method:</span> {{item.paymentMethod}}</p>
+                   <p><span>Contact Number:</span> 0{{item.customerContact}}</p>
+                   <p><span>Shipping Address:</span> {{item.shippingAddress}}</p>
+                 </div>
+                 <!-- </div> -->
+               </div>
+             </div>
+           </div>
+           <div class="card card-row card-primary">
+             <div class="card-header">
+               <h3 class="card-title">
+                 Preparing
+               </h3>
+             </div>
+             <div class="card-body">
+               <div *ngFor="let item of ToDo" class="card card-info card-outline">
+                 <div class="card-header">
+                   <h5 class="card-title">{{item.customer}}</h5>
+                   <div class="card-tools">
+                     <a [routerLink]="['details/'+item.id]" class="btn btn-tool btn-link">#{{item.id}}</a>
+                     <a [routerLink]="['details/'+item.id]" class="btn btn-tool btn-edit">
+                       <i class="fas fa-pen"></i>
+                     </a>
+                   </div>
+                 </div>
+                 <!-- <div class="card-body"> -->
+                 <div class="custom-control">
+                   <!-- <input class="custom-control-input" type="text"> -->
+                   <!-- <input type="text" class="custom-control-input">
+                  <label for="customCheckbox1" class="custom-control-label">Status</label> -->
+                   <p><span>Date Created:</span> {{item.date|date}}</p>
+                   <p><span>Delivery Method:</span> {{item.ship}}</p>
+                   <p><span>Payment Method:</span> {{item.paymentMethod}}</p>
+                   <p><span>Contact Number:</span> 0{{item.customerContact}}</p>
+                   <p><span>Shipping Address:</span> {{item.shippingAddress}}</p>
+                 </div>
+                 <!-- </div> -->
+               </div>
+             </div>
+           </div>
+           <div class="card card-row card-default">
+             <div class="card-header bg-info">
+               <h3 class="card-title">
+                 On Delivery
+               </h3>
+             </div>
+             <div class="card-body">
+               <div *ngFor="let item of OnDelivery" class="card card-info card-outline">
+                 <div class="card-header">
+                   <h5 class="card-title">{{item.customer}}</h5>
+                   <div class="card-tools">
+                     <a [routerLink]="['details/'+item.id]" class="btn btn-tool btn-link">#{{item.id}}</a>
+                     <a [routerLink]="['details/'+item.id]" class="btn btn-tool btn-edit">
+                       <i class="fas fa-pen"></i>
+                     </a>
+                   </div>
+                 </div>
+                 <!-- <div class="card-body"> -->
+                 <div class="custom-control">
+                   <!-- <input class="custom-control-input" type="text"> -->
+                   <!-- <input type="text" class="custom-control-input">
+                  <label for="customCheckbox1" class="custom-control-label">Status</label> -->
+                   <p><span>Date Created:</span> {{item.date|date}}</p>
+                   <p><span>Delivery Method:</span> {{item.ship}}</p>
+                   <p><span>Payment Method:</span> {{item.paymentMethod}}</p>
+                   <p><span>Contact Number:</span> 0{{item.customerContact}}</p>
+                   <p><span>Shipping Address:</span> {{item.shippingAddress}}</p>
+                 </div>
+                 <!-- </div> -->
+               </div>
+             </div>
+           </div>
+           <div class="card card-row card-success">
+             <div class="card-header">
+               <h3 class="card-title">
+                 Completed
+               </h3>
+             </div>
+             <div class="card-body">
+               <div *ngFor="let item of Completed" class="card card-info card-outline">
+                 <div class="card-header">
+                   <h5 class="card-title">{{item.customer}}</h5>
+                   <div class="card-tools">
+                     <a [routerLink]="['details/'+item.id]" class="btn btn-tool btn-link">#{{item.id}}</a>
+                     <a [routerLink]="['details/'+item.id]" class="btn btn-tool btn-edit">
+                       <i class="fas fa-pen"></i>
+                     </a>
+                   </div>
+                 </div>
+                 <!-- <div class="card-body"> -->
+                 <div class="custom-control">
+                   <!-- <input class="custom-control-input" type="text"> -->
+                   <!-- <input type="text" class="custom-control-input">
+                   <label for="customCheckbox1" class="custom-control-label">Status</label> -->
+                   <p><span>Date Created:</span> {{item.date|date}}</p>
+                   <p><span>Delivery Method:</span> {{item.ship}}</p>
+                   <p><span>Payment Method:</span> {{item.paymentMethod}}</p>
+                   <p><span>Contact Number:</span> 0{{item.customerContact}}</p>
+                   <p><span>Shipping Address:</span> {{item.shippingAddress}}</p>
+                 </div>
+                 <!-- </div> -->
+               </div>
+             </div>
+           </div>
+         </div>
+       </section>
+     </div>
+     <!-- /.control-sidebar -->
+   </div>
+   <!-- ./wrapper -->
+
+
+   <script>
+     $(function () {
+
+     })
+
+   </script>
+ </div>

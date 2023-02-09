@@ -1,0 +1,113 @@
+* {
+  box-sizing: border-box;
+}
+
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.main-display {
+  width: 100%;
+  margin: 0 20px;
+  justify-content: center;
+}
+h1,
+h2 {
+  text-align: center;
+  font-family: monospace;
+}
+.lbl {
+  margin: 0px;
+  padding: 5px auto;
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: bold;
+}
+.aside {
+  max-height: 1060px;
+}
+
+.aside > input {
+  width: 100%;
+}
+input,
+textarea {
+  margin-bottom: 5px;
+  /* width: 100%; */
+  border-radius: 5px;
+}
+input:focus,
+textarea:focus {
+  border: 3px solid green;
+  outline: none;
+}
+
+label {
+  margin-left: 5px;
+}
+
+@keyframes bounce {
+  50% {
+    transform: rotate(5deg) translate(20px, -50px);
+  }
+  to {
+    transform: scale(0.9) rotate(10deg) translate(50px, -80px);
+    opacity: 0;
+  }
+}
+
+.btn:active {
+  /* animation: bounce 0.2s 1 linear; */
+}
+#btnReload {
+  color: azure;
+}
+input:checked .checkmark {
+  background-color: green;
+  color: azure;
+}
+.content {
+  max-height: 1060px;
+  /* overflow: scroll; */
+}
+.list {
+  width: 100%;
+  /* overflow: scroll; */
+  position: relative;
+}
+.display-img {
+  padding: 10px 30px;
+}
+.display-img img {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+textarea {
+  width: 100%;
+}
+tbody > tr:hover {
+  background-color: #2ecc71;
+  color: #f5f6fa;
+  cursor: pointer;
+}
+tbody > tr > td {
+  /* font-family: monospace; */
+  text-align: left;
+  /* word-wrap: break-word; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  /* display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; */
+}
+.card {
+  height: 700px;
+}
+.controller {
+  margin-top: 20px;
+}

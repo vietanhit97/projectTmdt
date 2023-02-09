@@ -1,0 +1,15 @@
+.cart-image {
+  width: 50%;
+  overflow: hidden;
+  margin-bottom: 0px;
+  border-radius: 10px;
+}
+.cart-image a img {
+  width: 100%;
+  object-fit: contain;
+}
+.cart-product {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

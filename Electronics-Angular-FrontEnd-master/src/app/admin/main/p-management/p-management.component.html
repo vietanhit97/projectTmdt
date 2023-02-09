@@ -1,0 +1,129 @@
+<h1>Spring Boot Products Management</h1>
+<div class="wrap">
+  <div class="main-display">
+    <div class="row">
+      <div class="col-md-3 display-img">
+        <img src="assets\Wallpapers\Electronics\{{emp.image}}" alt="this is a photo">
+      </div>
+      <div class="col-sm-12 col-md-9">
+        <!-- <div class="main"> -->
+        <div class="row">
+          <div class="col-md-2 col-sm-12">
+            <div class="aside">
+              <!-- <p>Thông tin</p> -->
+              <p class="lbl">Mã sản phẩm</p>
+              <input type="number" title="Employee _Details" placeholder="" disabled [(ngModel)]="emp.id">
+              <p class="lbl">Tên sản phẩm</p>
+              <input type="text" title="Employee _Details" placeholder="" [(ngModel)]="emp.name">
+              <p class="lbl">Mô tả sản phẩm</p>
+              <!-- <input type="text" title="Employee _Details" placeholder="" [(ngModel)]="emp.des"> -->
+              <textarea title="Employee _Details" name="" [(ngModel)]="emp.des" id="" cols="30" rows="5"></textarea>
+              <p class="lbl">Đánh giá trung bình</p>
+              <input type="number" title="Employee _Details" placeholder="" [(ngModel)]="emp.rate">
+              <p class="lbl">Trạng thái sản phẩm</p>
+              <input type="number" title="Employee _Details" placeholder="" [(ngModel)]="emp.status">
+              <p class="lbl">Màu sắc</p>
+              <input type="text" title="Employee _Details" placeholder="" [(ngModel)]="emp.color">
+              <p class="lbl">Cấu hình</p>
+              <!-- <input type="text" title="Employee _Details" placeholder="" [(ngModel)]="emp.spec"> -->
+              <textarea title="Employee _Details" name="" [(ngModel)]="emp.spec" id="" cols="30" rows="3"></textarea>
+              <p class="lbl">Tồn kho</p>
+              <input type="number" title="Employee _Details" placeholder="" [(ngModel)]="emp.stock">
+              <p class="lbl">Giá sản phẩm</p>
+              <input type="number" title="Employee _Details" placeholder="" [(ngModel)]="emp.price">
+              <p class="lbl">Trực thuộc danh mục</p>
+              <input type="number" title="Employee _Details" placeholder="" [(ngModel)]="emp.cateId">
+              <p class="lbl">Image Upload</p>
+              <!-- <label for="myfile">Select files:</label> -->
+              <input placeholder="image upload here !" type="file" if="myfile" class="file-input"
+                (change)="onFileSelected($event)" #fileUpload>
+              <!-- <div class="file-upload">
+                  <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+                    attach_file
+                  </button>
+                </div> -->
+            </div>
+          </div>
+          <div class="col-md-10 col-sm-12">
+            <div class="content">
+              <div class="list">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">Danh sách Sản phẩm</h3>
+
+                        <div class="card-tools">
+                          <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right"
+                              placeholder="Search">
+
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-default">
+                                <i class="fas fa-search"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body table-responsive p-0" style="height: 300px;">
+                        <table class="table table-head-fixed text-nowrap">
+                          <thead>
+                            <tr>
+                              <th>Id</th>
+                              <th>Name</th>
+                              <th>Des</th>
+                              <th>Rate</th>
+                              <th>Status</th>
+                              <th>Color</th>
+                              <th>Spec</th>
+                              <th>Stock</th>
+                              <th>Price</th>
+                              <th>Image</th>
+                              <th>Category</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let emp of products" (click)="loadDetail(emp.id)">
+                              <td>{{emp.id}}</td>
+                              <td>{{emp.name}}</td>
+                              <td>{{emp.des}}</td>
+                              <td>{{emp.rate}}</td>
+                              <td>{{emp.status}}</td>
+                              <td>{{emp.color}}</td>
+                              <td>{{emp.spec}}</td>
+                              <td>{{emp.stock}}</td>
+                              <td>{{emp.price}}</td>
+                              <td>{{emp.image}}</td>
+                              <td>{{emp.categoryDto.name}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                    <div class="controller">
+                      <button type="button" class="btn btn-block btn-success btn-sm" id="btnAdd" title="none"
+                        (click)="add(emp)">Add</button>
+                      <button type="button" class="btn btn-block btn-info btn-sm" id="btnUpdate" title="none"
+                        (click)="update(emp)">Save</button>
+                      <button type="button" class="btn btn-block btn-danger btn-sm" id="btnDelete" title="none"
+                        (click)="remove(emp.id)">Delete</button>
+                      <button type="button" class="btn btn-block btn-warning btn-sm" id="btnReload" title="none"
+                        (click)="load()">Reload</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- </div> -->
+      </div>
+      <!-- <div class="col-md-2">
+      </div> -->
+    </div>
+  </div>
+</div>
